@@ -1,3 +1,4 @@
+import time
 class Node:
     def __init__(self,v):
         self.left=None
@@ -81,7 +82,12 @@ def preOrder(root):
         else:
             break
 
-
+def minelement(root):
+    if root==None:
+        return
+    while root.left is not None:
+        root=root.left
+    return root.value
 if __name__=="__main__":
     root=None
     root=insert(root,8)
@@ -93,7 +99,8 @@ if __name__=="__main__":
     insert(root,6)
     insert(root,9)
     preOrderRec(root)
-    print("iterative preorder traversal")
+    print("\niterative preorder traversal")
     preOrder(root)
-
+    print("the minimum element in the tree is ")
+    print(minelement(root))
 
