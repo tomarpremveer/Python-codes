@@ -29,8 +29,28 @@ class LinkedList:
             n1= n1.next
             n2=n2.next.next
         print(n1.value)
+    def countNodes(self):
+        count=0
+        t=self.head
+        while t is not None:
+            count+=1
+            t=t.next
+        return count
+#code for transforming linked list to BST
+def sortedBst(head):
+    n=head.countNodes()
+    return  sortedBstRecur(head,n)
+def sortedBstRecur(head,n):
+    if n<=0:
+        return None
+    left=sortedBstRecur(head,n//2)
 
-
+    root=Node(head.value)
+    root.left=left
+    head=head.next
+    root.right=sortedBstRecur(head,n-n//2-1)
+    return root
+#code ends here
 
 if __name__ == "__main__":
     l = LinkedList()
@@ -40,3 +60,4 @@ if __name__ == "__main__":
     l.addHead(3)
     l.printNode()
     l.printMiddle()
+    print(l.countNodes())

@@ -88,6 +88,19 @@ def minelement(root):
     while root.left is not None:
         root=root.left
     return root.value
+
+def arrToBst(arr):
+    if not arr:
+        return None
+    mid=(len(arr))//2
+
+    root=Node(arr[mid])
+    root.left=arrToBst(arr[:mid])
+
+    root.right=arrToBst(arr[mid+1:])
+
+    return root
+
 if __name__=="__main__":
     root=None
     root=insert(root,8)
@@ -98,9 +111,8 @@ if __name__=="__main__":
     insert(root,1)
     insert(root,6)
     insert(root,9)
-    preOrderRec(root)
-    print("\niterative preorder traversal")
-    preOrder(root)
-    print("the minimum element in the tree is ")
-    print(minelement(root))
 
+    arr=[1,2,3,4,5,6]
+    r=arrToBst(arr)
+    print(r.left.left.value)
+    inorder(r)
