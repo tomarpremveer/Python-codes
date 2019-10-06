@@ -68,19 +68,9 @@ def prefix(arr):
         presum[i]=presum[i-1]+presum[i]
     return presum
 
-def maxdist(arr,k):
-    d={}
-    count=len(arr)
-    for i in arr:
-        if i in d:
-            count-=1
-            k-=1
-        else:
-            d[i]=1
-    return count-k
 
 
-
+def value
 
 if __name__ == "__main__":
-    print(maxdist([1,2,2,2],1))
+    pass
