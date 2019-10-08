@@ -1,13 +1,18 @@
 from collections import Counter
 import heapq
 
-
+class Node:
+    def __init__(self,freq,char):
+        self.freq=freq
+        self.char=char
+    def __cmp__(self, other):
+        return self.freq < other.freq
+heapq._
 class Heap:
     def __init__(self,arr):
         self.dic=Counter(arr)
-        self.heap=[v for (i,v) in self.dic.items()]
+        self.heap=[Node(i,v) for (i,v) in self.dic.items()]
         heapq._heapify_max(self.heap)
-
     def maxdist(self,k):
         while k > 0:
             v=heapq._heappop_max(self.heap)

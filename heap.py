@@ -68,9 +68,19 @@ def prefix(arr):
         presum[i]=presum[i-1]+presum[i]
     return presum
 
+def maxHeapPush(heap,value):
+    pass
 
+def noadj(s):
+    d={}
+    for i in range(len(s)):
+        if s[i] in d:
+            d[s[i]]+=1
+        else:
+            d[s[i]]=1
 
-def value
 
 if __name__ == "__main__":
-    pass
+    arr=[5,3,1,9,8]
+    heapify(arr,len(arr),len(arr)-1)
+    print(arr)
