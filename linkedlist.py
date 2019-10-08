@@ -22,6 +22,24 @@ class LinkedList:
             print(temp.value,end="->")
             temp = temp.next
         print(None)
+
+    def add(self):
+        self.reverse()
+        t = self.head
+        carry = 1
+        while t is not None:
+            t.value += carry
+            if t.value >= 10:
+                t.value = 0
+                carry = 1
+            else:
+                carry = 0
+            t = t.next
+        self.reverse()
+        if carry:
+            n = Node(carry)
+            n.next = self.head
+            self.head = n
     def printMiddle(self):
         n1=self.head
         n2=self.head
@@ -36,6 +54,21 @@ class LinkedList:
             count+=1
             t=t.next
         return count
+    def reverse(self):
+        temp = self.head
+        p = None
+        n = None
+        while temp is not None:
+            n = temp.next
+            temp.next = p
+            p = temp
+            temp = n
+        self.head=p
+    def printlist(self):
+        t = self.head
+        while t is not None:
+            print(t.value, end=" ")
+            t = t.next
 #code for transforming linked list to BST
 def sortedBst(head):
     n=head.countNodes()
@@ -59,5 +92,5 @@ if __name__ == "__main__":
     l.addHead(6)
     l.addHead(3)
     l.printNode()
-    l.printMiddle()
-    print(l.countNodes())
+    l.add()
+    l.printlist()

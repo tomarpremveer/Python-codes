@@ -29,21 +29,6 @@ class Linkedlist:
             p = temp
             temp = n
         self.head=p
-    def add(self):
-        t=self.head
-        carry=1
-        while t is not None:
-            t.value+=carry
-            if t.value >= 10:
-                t.value=0
-                carry=1
-            else:
-                carry=0
-            t=t.next
-        if carry:
-            n=Node(carry)
-            n.next=self.head
-            self.head=n
     def printlist(self):
         t = self.head
         while t is not None:
@@ -57,8 +42,6 @@ if __name__ == "__main__":
     l = Linkedlist()
     for i in arr:
         l.insert(i)
-    l.reverse()
     l.add()
-    l.reverse()
     l.printlist()
 
