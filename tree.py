@@ -101,18 +101,31 @@ def arrToBst(arr):
 
     return root
 
+def sumPath(root,s):
+    if root is None:
+        return s
+    else:
+        return int(sumPath(root.left,s+str(root.value))) + int(sumPath(root.right,s+str(root.value)))
+
 if __name__=="__main__":
-    root=None
-    root=insert(root,8)
-    insert(root,3)
-    insert(root, 4)
-    insert(root,5)
-    insert(root,7)
-    insert(root,1)
-    insert(root,6)
-    insert(root,9)
+    #root=None
+    #root=insert(root,8)
+    #insert(root,3)
+    #insert(root, 4)
+    #insert(root,5)
+    #insert(root,7)
+    #insert(root,1)
+    #insert(root,6)
+    #insert(root,9)
 
     arr=[1,2,3,4,5,6]
-    r=arrToBst(arr)
-    print(r.left.left.value)
-    inorder(r)
+    #r=arrToBst(arr)
+    #print(r.left.left.value)
+    #inorder(r)
+    s=""
+    root=Node(4)
+    root.left=Node(9)
+    root.right=Node(0)
+    root.left.left=Node(5)
+    root.left.right=Node(1)
+    print(sumPath(root,s))

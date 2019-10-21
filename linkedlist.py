@@ -54,8 +54,8 @@ class LinkedList:
             count+=1
             t=t.next
         return count
-    def reverse(self):
-        temp = self.head
+    def reverse(self,h):
+        temp = h
         p = None
         n = None
         while temp is not None:
@@ -63,13 +63,70 @@ class LinkedList:
             temp.next = p
             p = temp
             temp = n
-        self.head=p
+        h=p
+        return h
     def printlist(self):
         t = self.head
         while t is not None:
             print(t.value, end=" ")
             t = t.next
+    def sortedMerge(self,a,b):
+        result=None
+        if a is None:
+            return b
+        if b is None:
+            return a
+        if a.value <= b.value:
+            result=Node(a.value)
+            result.next=self.sortedMerge(a.next,b)
+        else:
+            result=Node(b.value)
+            result.next=self.sortedMerge(a,b.next)
+        return result
+    def getmiddle(self,h):
+        if h is None:
+            return h
+        slow=h
+        fast=h
+        while fast.next.next is not None and fast.next is not None:
+            slow=slow.next
+            fast=fast.next.next
+        return slow
+    def mergeSort(self,h):
+        if h is None or h.next is None:
+            return h
+        mid=self.getmiddle(h)
+        nextofmid=mid.next
+        mid.next=None
+        left=self.mergeSort(h)
+        right=self.mergeSort(nextofmid)
+        sortedlist=self.sortedMerge(left,right)
+        return sortedlist
+    def arrange(self,h):
+        slow = h
+        fast = h
+        while fast.next.next is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        node2=slow.next
+        node1=h
+        slow.next=None
+        node2=self.reverse(node2)
+        node=Node(0)
+        curr=node
+        while node1 is not None or node2 is not None:
+            if node1 is not None:
+                curr.next=node1
+                curr=curr.next
+                node1=node1.next
+            if node2 is not None:
+                curr.next=node2
+                curr=curr.next
+                node2=node2.next
+        h=node.next
+        return h
 #code for transforming linked list to BST
+
 def sortedBst(head):
     n=head.countNodes()
     return  sortedBstRecur(head,n)
@@ -87,10 +144,12 @@ def sortedBstRecur(head,n):
 
 if __name__ == "__main__":
     l = LinkedList()
+    #l.addHead(5)
     l.addHead(4)
-    l.addHead(5)
-    l.addHead(6)
     l.addHead(3)
-    l.printNode()
-    l.add()
+    l.addHead(7)
+    l.addHead(1)
+    l.printlist()
+    print()
+    l.head=l.arrange(l.head)
     l.printlist()
