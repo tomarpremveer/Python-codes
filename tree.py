@@ -107,6 +107,40 @@ def sumPath(root,s):
     else:
         return int(sumPath(root.left,s+str(root.value))) + int(sumPath(root.right,s+str(root.value)))
 
+
+def levelOrderTraversal(root):
+    height = h(root)
+    itr = False
+    for i in range(1, height + 1):
+        printGivenLevel(root, i, itr)
+        itr = not itr
+
+
+def printGivenLevel(root, level, itr):
+    if root is None:
+        return
+    if level == 1:
+        print(root.value)
+    else:
+        if itr:
+            printGivenLevel(root.left, level - 1, itr)
+            printGivenLevel(root.right, level - 1, itr)
+        else:
+            printGivenLevel(root.right, level - 1, itr)
+            printGivenLevel(root.left, level - 1, itr)
+
+
+def h(root):
+    if root is None:
+        return 0
+    else:
+        left = h(root.left)
+        right = h(root.right)
+        if left < right:
+            return right + 1
+        else:
+            return left + 1
+
 if __name__=="__main__":
     #root=None
     #root=insert(root,8)
@@ -123,9 +157,11 @@ if __name__=="__main__":
     #print(r.left.left.value)
     #inorder(r)
     s=""
-    root=Node(4)
-    root.left=Node(9)
-    root.right=Node(0)
-    root.left.left=Node(5)
-    root.left.right=Node(1)
-    print(sumPath(root,s))
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(7)
+    root.left.right = Node(6)
+    root.right.left = Node(5)
+    root.right.right = Node(4)
+    levelOrderTraversal(root)

@@ -1,6 +1,16 @@
 import time
 
 
+def rem(arr):
+    d = []
+    for i in range(len(arr)):
+        if arr[arr[i]] < 0:
+            d.append(abs(arr[i]))
+        else:
+            arr[arr[i]] = -arr[arr[i]]
+    return d
+
+
 def p(a, n):
     if n == 1:
         return 2
@@ -64,5 +74,5 @@ def getch(n, m, r, grid, c):
 
 
 if __name__ == "__main__":
-    grid=[[0,1,-1],[1,0,-1],[1,1,1]]
-    print(cherryPickup(grid))
+    arr = [4, 3, 2, 7, 8, 2, 3, 1]
+    print(rem(arr))
