@@ -28,7 +28,6 @@ class dblLinkedList:
 
 if __name__ == "__main__":
 	dbl = dblLinkedList()
-
 	dbl.insertHead(3)
 	dbl.insertHead(4)
 	dbl.insertHead(5)
