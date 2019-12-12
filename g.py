@@ -1,40 +1,37 @@
-from collections import defaultdict
-class Graph(object):
-    def __init__(self,V):
-        self.V=V
-        self.graph=defaultdict(list)
-    def connect(self,u,v):
-        self.graph[u].append(v)
-    def find_all_distances(self,s):
-        ro=s
-        Visited=[False]*(self.V)
-        level=[0]*(self.V)
-        level[s]=0
-        Visited[s]=True
-        q=[]
-        q.append(s)
-        while q:
-            s=q.pop(0)
-            for i in self.graph[s]:
-                if Visited[i]==False:
-                    Visited[i] = True
-                    level[i]=level[s]+1
-                    q.append(i)
-        for a in range(0,(self.V)):
-            if a==ro:
-                continue
-            if level[a]!=0 and a!=ro:
-                print(6*level[i],end=" ")
-            else:
-                print(-1,end=" " )
-        print()
+class AdjNode:
+    def __init__(self,data):
+        self.value=data
+        self.next=None
+class Graph:
+    def __init__(self,vertices):
+        self.v=vertices
+        self.graph=[None]*self.v
+
+    def add_edge(self,src,dest):
+        node=AdjNode(dest)
+        node.next=self.graph[src]
+        self.graph[src]=node
+
+        node=AdjNode(src)
+        node.next=self.graph[dest]
+        self.graph[dest]=node
+    def printGraph(self):
+        for i in range(self.v):
+            print("Adjancy list of {}\n head".format(i),end="")
+            temp=self.graph[i]
+            while temp:
+                print("-> {}".format(temp.value),end=" ")
+                temp=temp.next
+            print("\n")
 if __name__=="__main__":
-    n,m = 4,2
-    graph = Graph(n)
-    graph.connect(0,1)
-    graph.connect(0,2)
-    #graph.connect(2,3)
-    #graph.connect(1,4)
-    s = 1
-    graph.find_all_distances(s-1)
+    v=5
+    graph=Graph(v)
+    graph.add_edge(0, 1)
+    graph.add_edge(0, 4)
+    graph.add_edge(1, 2)
+    graph.add_edge(1, 3)
+    graph.add_edge(1, 4)
+    graph.add_edge(2, 3)
+    graph.add_edge(3, 4)
+    graph.printGraph()
 
